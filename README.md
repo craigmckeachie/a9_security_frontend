@@ -1,3 +1,6 @@
+Based on the article:
+[Angular Authentication Revisted](https://medium.com/@blacksonic86/angular-2-authentication-revisited-611bf7373bf9)
+
 ```
 ng new ngauth --routing
 cd ngauth
@@ -37,4 +40,41 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "profile", component: ProfileComponent }
 ];
+```
+
+user.service.ts
+
+```
+
+```
+
+login.component.ts
+
+```
+
+```
+
+logged-in.guard.ts
+
+```
+
+```
+
+Add guard to routes
+app-routing.module.ts
+
+```
+{ path: "profile", component: ProfileComponent, canActivate: [LoggedInGuard] }
+```
+
+Provide the route guard:
+app.module.ts
+
+```
+@NgModule({
+ ...
+  providers: [LoggedInGuard],
+  ...
+})
+export class AppModule { }
 ```

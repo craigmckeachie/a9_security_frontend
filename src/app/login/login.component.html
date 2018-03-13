@@ -1,3 +1,8 @@
-<p>
-  login works!
-</p>
+<h1>Login</h1>
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+  <input formControlName="email" type="text" placeholder="email">
+  <br>
+  <input formControlName="password" type="text" placeholder="password">
+  <br>
+  <button>Login</button>
+</form>
