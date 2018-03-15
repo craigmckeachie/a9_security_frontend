@@ -5,8 +5,8 @@ import { Observable } from "rxjs/Observable";
 import { catchError, tap, map } from "rxjs/operators";
 import { _throw } from "rxjs/observable/throw";
 import { HttpErrorResponse } from "@angular/common/http";
-import { environment } from "../environments/environment";
-import { User } from "./profile/users/shared/user.model";
+import { environment } from "../../../environments/environment";
+import { User } from "./user.model";
 
 @Injectable()
 export class UserService {
@@ -28,13 +28,6 @@ export class UserService {
   }
 
   login(email, password) {
-    console.log(environment.apiUrl + "auth/login");
-    console.log({ email, password });
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     "Content-Type": "application/json"
-    //   })
-    // };
 
     return this.http
       .post(environment.apiUrl + "auth/login", { email, password })

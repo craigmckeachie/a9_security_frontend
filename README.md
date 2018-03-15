@@ -78,3 +78,8 @@ app.module.ts
 })
 export class AppModule { }
 ```
+
+//todo:
+//move user.service into users/shared
+//redirect
+//better profile output

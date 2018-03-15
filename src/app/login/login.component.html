@@ -1,8 +1,16 @@
-<h1>Login</h1>
-<form [formGroup]="loginForm" (submit)="onSubmit()">
-  <input formControlName="email" type="text" placeholder="email">
-  <br>
-  <input formControlName="password" type="text" placeholder="password">
-  <br>
-  <button>Login</button>
-</form>
+<div class="ui middle aligned  aligned grid">
+  <div class="six wide column">
+    <form *ngIf="!isLoggedIn" [formGroup]="loginForm" (submit)="onSubmit()" class="ui large form">
+
+      <div class="field">
+        <input formControlName="email" type="text" placeholder="email">
+      </div>
+      <div class="field">
+        <input formControlName="password" type="password" placeholder="password">
+      </div>
+
+      <button class="ui fluid large teal submit button">Login</button>
+
+    </form>
+  </div>
+</div>

@@ -1,13 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { UserService } from "../users/shared/user.service";
 import {
   FormBuilder,
   AbstractControl,
   FormGroup,
   Validators
 } from "@angular/forms";
-
-import { UserService } from "../user.service";
 
 @Component({
   selector: "app-login",
@@ -16,6 +15,7 @@ import { UserService } from "../user.service";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       .login(formValues.email, formValues.password)
       .subscribe(result => {
         if (result) {
-          this.router.navigate([""]);
+          this.router.navigate(["/profile"]);
         }
       });
   }
