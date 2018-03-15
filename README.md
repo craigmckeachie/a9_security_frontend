@@ -79,7 +79,27 @@ app.module.ts
 export class AppModule { }
 ```
 
-//todo:
-//move user.service into users/shared
-//redirect
-//better profile output
+```
+npm install jwt-decode --save
+import * as decode from "jwt-decode";
+
+UserService
+get authenticatedUser() {
+    let token = localStorage.getItem("auth_token");
+    let payload = decode(token);
+    return payload;
+  }
+
+  app.component.ts
+  get authenticatedUser() {
+    return this.userService.authenticatedUser;
+  }
+
+app.component.html
+         <ng-template #loggedOut>
+          Welcome {{authenticatedUser.email}}
+          <a (click)="logout($event)" class="ui item">
+            Logout
+          </a>
+        </ng-template>
+```

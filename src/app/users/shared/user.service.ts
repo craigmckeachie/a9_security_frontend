@@ -7,15 +7,23 @@ import { _throw } from "rxjs/observable/throw";
 import { HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { User } from "./user.model";
+import * as decode from "jwt-decode";
 
 @Injectable()
 export class UserService {
-  private loggedIn = false;
   private usersUrl = environment.apiUrl + "users/";
 
-  constructor(private http: HttpClient) {
-    this.loggedIn = !!localStorage.getItem("auth_token");
+  get isLoggedIn() {
+    return !!localStorage.getItem("auth_token");
   }
+
+  get authenticatedUser() {
+    let token = localStorage.getItem("auth_token");
+    let payload = decode(token);
+    return payload;
+  }
+
+  constructor(private http: HttpClient) {}
 
   find(id: number) {
     const authToken = localStorage.getItem("auth_token");
@@ -28,30 +36,23 @@ export class UserService {
   }
 
   login(email, password) {
-
     return this.http
       .post(environment.apiUrl + "auth/login", { email, password })
       .pipe(
         map((res: any) => {
           if (res.success) {
             localStorage.setItem("auth_token", res.access_token);
-            this.loggedIn = true;
           }
           return res.success;
         }),
         catchError((error: HttpErrorResponse) => {
           console.error(error);
-          return _throw("An error occurred when trying to login.");
+          return _throw("The email or password you have entered is invalid.");
         })
       );
   }
 
   logout() {
     localStorage.removeItem("auth_token");
-    this.loggedIn = false;
-  }
-
-  isLoggedIn() {
-    return this.loggedIn;
   }
 }

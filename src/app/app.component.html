@@ -13,6 +13,8 @@
           Login
         </a>
         <ng-template #loggedOut>
+          <span class="ui item">Welcome {{authenticatedUser.email}}</span>
+
           <a (click)="logout($event)" class="ui item">
             Logout
           </a>

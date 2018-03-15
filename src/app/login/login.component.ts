@@ -15,6 +15,7 @@ import {
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  message: string;
 
   constructor(
     private userService: UserService,
@@ -32,12 +33,15 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     let formValues = this.loginForm.value;
     console.log(formValues);
-    this.userService
-      .login(formValues.email, formValues.password)
-      .subscribe(result => {
+    this.userService.login(formValues.email, formValues.password).subscribe(
+      result => {
         if (result) {
           this.router.navigate(["/profile"]);
         }
-      });
+      },
+      error => {
+        this.message = error;
+      }
+    );
   }
 }

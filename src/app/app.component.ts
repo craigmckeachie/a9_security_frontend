@@ -9,7 +9,11 @@ import { Router } from "@angular/router";
 })
 export class AppComponent {
   get isLoggedIn() {
-    return this.userService.isLoggedIn();
+    return this.userService.isLoggedIn;
+  }
+
+  get authenticatedUser() {
+    return this.userService.authenticatedUser;
   }
 
   constructor(private userService: UserService, private router: Router) {}
@@ -17,6 +21,6 @@ export class AppComponent {
   logout(event) {
     event.preventDefault();
     this.userService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(["/"]);
   }
 }
