@@ -8,7 +8,7 @@ npm install
 
 ## Run
 
-1.  This code depends on backend code in the `nodejs-jwt-authentication-sample` directory. Open that folder in another editor window and follow the directions in its `readme.md` to get the backend API up and running.
+1.  This code depends on backend code in the `mock-auth-json-server` directory. Open that folder in another editor window and follow the directions in its `readme.md` to get the backend API up and running.
 2.  Run the command
 
 ```
