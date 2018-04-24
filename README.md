@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
 
 ## Authorization
 
-Take the following steps to _guard_ the `profile` route and only allow _authenticated_ users to reach the `profile`. Route guards in Angular are implemented in JavaScript and no secret is safe on the client. Route guards simply improve the user experience. The real security is in the backend code that verifies the `authorization token` sent in the header of the get request in `UserService.find()` that runs when the `profile` route is visited.
+The following steps were taken to _guard_ the `profile` route and only allow _authenticated_ users to reach the `profile`. Route guards in Angular are implemented in JavaScript and no secret is safe on the client. Route guards simply improve the user experience. The real security is in the backend code that verifies the `authorization token` sent in the header of the get request in `UserService.find()` that runs when the `profile` route is visited.
 
 1.  `login\shared\logged-in.guard.ts`
 
