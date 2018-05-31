@@ -1,9 +1,9 @@
 // user.service.ts
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { catchError, tap, map } from "rxjs/operators";
-import { _throw } from "rxjs/observable/throw";
+import { throwError } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { User } from "./user.model";
@@ -47,7 +47,7 @@ export class UserService {
         }),
         catchError((error: HttpErrorResponse) => {
           console.error(error);
-          return _throw("The email or password you have entered is invalid.");
+          return throwError("The email or password you have entered is invalid.");
         })
       );
   }
