@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { Router, CanActivate } from "@angular/router";
-import { UserService } from "../../users/shared/user.service";
+import { Injectable } from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
+import { UserService } from '../../users/shared/user.service';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {
@@ -10,7 +10,7 @@ export class LoggedInGuard implements CanActivate {
     if (this.user.isLoggedIn) {
       return true;
     } else {
-      this.router.navigate(["/login"]);
+      this.router.navigate(['/login']);
       return false;
     }
   }
