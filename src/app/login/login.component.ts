@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { UserService } from "../users/shared/user.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../users/shared/user.service';
 import {
   FormBuilder,
   AbstractControl,
   FormGroup,
   Validators
-} from "@angular/forms";
+} from '@angular/forms';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    let formValues = this.loginForm.value;
+    const formValues = this.loginForm.value;
     console.log(formValues);
     this.userService.login(formValues.email, formValues.password).subscribe(
       result => {
         if (result) {
-          this.router.navigate(["/profile"]);
+          this.router.navigate(['/profile']);
         }
       },
       error => {
