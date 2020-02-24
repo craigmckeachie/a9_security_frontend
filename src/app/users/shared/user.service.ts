@@ -7,20 +7,35 @@ import { throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { User } from './user.model';
-import * as decode from 'jwt-decode';
+// import * as decode from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class UserService {
   private usersUrl = environment.apiUrl + 'users/';
 
   get isLoggedIn() {
-    return !!localStorage.getItem('auth_token');
+    if (localStorage.getItem('auth_token')) {
+      if (!this.isTokenExpired) {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }
 
   get authenticatedUser() {
     const token = localStorage.getItem('auth_token');
-    const payload = decode(token);
+    const helper = new JwtHelperService();
+    // const payload = decode(token);
+    const payload = helper.decodeToken(token);
     return payload;
+  }
+
+  get isTokenExpired() {
+    const token = localStorage.getItem('auth_token');
+    const helper = new JwtHelperService();
+    return helper.isTokenExpired(token);
   }
 
   constructor(private http: HttpClient) {}
@@ -47,7 +62,9 @@ export class UserService {
         }),
         catchError((error: HttpErrorResponse) => {
           console.error(error);
-          return throwError('The email or password you have entered is invalid.');
+          return throwError(
+            'The email or password you have entered is invalid.'
+          );
         })
       );
   }

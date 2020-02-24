@@ -202,4 +202,40 @@ get authenticatedUser() {
 ## Resources
 
 - [Angular Authentication Article](https://medium.com/@blacksonic86/angular-2-authentication-revisited-611bf7373bf9)
-- [Library to Help with Angular Authentication](https://www.npmjs.com/package/@auth0/angular-jwt)
+- [Angular JWT- Library to Help with Angular Authentication](https://www.npmjs.com/package/@auth0/angular-jwt)
+
+## Angular JWT
+
+```shell
+npm install @auth0/angular-jwt
+```
+
+```ts
+@Injectable()
+export class UserService {
+  private usersUrl = environment.apiUrl + 'users/';
+
+  get isLoggedIn() {
+    if (localStorage.getItem('auth_token')) {
+      if (!this.isTokenExpired) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  get authenticatedUser() {
+    const token = localStorage.getItem('auth_token');
+    const helper = new JwtHelperService();
+    // const payload = decode(token);
+    const payload = helper.decodeToken(token);
+    return payload;
+  }
+
+  get isTokenExpired() {
+    const token = localStorage.getItem('auth_token');
+    const helper = new JwtHelperService();
+    return helper.isTokenExpired(token);
+  }
+```
