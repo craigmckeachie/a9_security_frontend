@@ -140,11 +140,11 @@ export class LoggedInGuard implements CanActivate {
 
 ```js
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: HomeComponent },
-  { path: "login", component: LoginComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   {
-    path: "profile",
+    path: 'profile',
     component: ProfileComponent,
     canActivate: [LoggedInGuard]
   }
@@ -192,9 +192,14 @@ get authenticatedUser() {
 
 ```html
 <ng-template #loggedOut>
-Welcome {{authenticatedUser.email}}
-<a (click)="logout($event)" class="ui item">
-  Logout
-</a>
+  Welcome {{authenticatedUser.email}}
+  <a (click)="logout($event)" class="ui item">
+    Logout
+  </a>
 </ng-template>
 ```
+
+## Resources
+
+- [Angular Authentication Article](https://medium.com/@blacksonic86/angular-2-authentication-revisited-611bf7373bf9)
+- [Library to Help with Angular Authentication](https://www.npmjs.com/package/@auth0/angular-jwt)
